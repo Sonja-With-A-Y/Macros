@@ -1,16 +1,15 @@
 use crate::*;
 
-
 pub fn play() {
     let mut f = File::open("a.txt").unwrap();
     let mut content = String::new();
     f.read_to_string(&mut content).unwrap();
     let mut vector = Vec::new();
 
-    let pressed = Regex::new(r"(Press|Release).*(Key.*)\)").unwrap();
+    let log_item = Regex::new(r"(Press|Release).*(Key.*)\)").unwrap();
 
-    for cap in pressed.captures_iter(&content) {
-        vector.push((&cap[1], &cap[2]))
+    for cap in log_item.captures_iter(&content) {
+        vector.push((cap[1].to_owned(), cap[2].to_owned()))
     }
 
     println!("{:?}", vector);

@@ -1,11 +1,11 @@
 use rdev::{simulate, EventType, SimulateError};
 use regex::Regex;
 use std::fs::{File, OpenOptions};
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 use std::{thread, time};
 
 use rdev::EventType::{KeyPress, KeyRelease};
-use rdev::{listen, Event};
+use rdev::{listen, Event, Key::*};
 
 mod play;
 mod record;
@@ -19,14 +19,9 @@ fn main() {
 }
 
 fn idle(event: Event) {
-    match event.name {
-        Some(string) => {
-            if string == "q" {
-                record()
-            } else if string == "p" {
-                play()
-            }
-        }
+    match event.event_type {
+        KeyRelease(KeyQ) => { record() },
+        KeyRelease(KeyP) => { play() },
         _ => (),
     }
 }
