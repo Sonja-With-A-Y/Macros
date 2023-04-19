@@ -4,6 +4,8 @@ use std::io::Write;
 use rdev::EventType::{KeyPress, KeyRelease};
 use rdev::{listen, Event, EventType};
 
+mod play;
+pub use play::*;
 fn main() {
     if let Err(error) = listen(idle) {
         println!("Error: {:?}", error)
@@ -12,7 +14,7 @@ fn main() {
 
 fn idle(event: Event) {
     match event.name {
-        Some(string) => if string == "q" {record()},
+        Some(string) => if string == "q" {record()} else if string == "p" {play()},
         _ => (),
     }
 }
