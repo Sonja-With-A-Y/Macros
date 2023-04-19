@@ -1,5 +1,6 @@
 use crate::*;
 
+
 pub fn play() {
     let mut f = File::open("a.txt").unwrap();
     let mut content = String::new();

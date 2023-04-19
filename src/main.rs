@@ -1,7 +1,7 @@
 use rdev::{simulate, EventType, SimulateError};
 use regex::Regex;
 use std::fs::{File, OpenOptions};
-use std::io::Write;
+use std::io::{Write, Read};
 use std::{thread, time};
 
 use rdev::EventType::{KeyPress, KeyRelease};
