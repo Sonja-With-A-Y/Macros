@@ -1,8 +1,4 @@
-use rdev::{simulate, EventType, SimulateError};
-use regex::Regex;
-use std::fs::File;
-use std::io::Read;
-use std::{thread, time};
+use crate::*;
 
 pub fn play() {
     let mut f = File::open("a.txt").unwrap();

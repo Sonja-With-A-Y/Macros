@@ -1,11 +1,17 @@
+use rdev::{simulate, EventType, SimulateError};
+use regex::Regex;
 use std::fs::{File, OpenOptions};
 use std::io::Write;
+use std::{thread, time};
 
 use rdev::EventType::{KeyPress, KeyRelease};
-use rdev::{listen, Event, EventType};
+use rdev::{listen, Event};
 
 mod play;
+mod record;
 pub use play::*;
+pub use record::*;
+
 fn main() {
     if let Err(error) = listen(idle) {
         println!("Error: {:?}", error)
@@ -14,34 +20,13 @@ fn main() {
 
 fn idle(event: Event) {
     match event.name {
-        Some(string) => if string == "q" {record()} else if string == "p" {play()},
+        Some(string) => {
+            if string == "q" {
+                record()
+            } else if string == "p" {
+                play()
+            }
+        }
         _ => (),
     }
-}
-
-fn record() {
-    File::create("a.txt").expect("File creation failed");
-
-    if let Err(error) = listen(callback) {
-        println!("Error: {:?}", error)
-    }
-}
-
-fn callback(event: Event) {
-
-    let f = OpenOptions::new()
-        .append(true)
-        .open("a.txt")
-        .expect("Cannot open file");
-
-    match event.event_type {
-
-        KeyPress(_) => log(f, event.event_type),
-        KeyRelease(_) => log(f,  event.event_type),
-        _ => {}
-    };
-}
-
-fn log(mut f: File, pressed_or_released: EventType) {
-    f.write(format!("{:?}\n", pressed_or_released).as_bytes()).expect("idk");
 }
