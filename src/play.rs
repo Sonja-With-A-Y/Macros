@@ -11,9 +11,9 @@ pub fn play() {
 
 fn choose_play_file(event: Event) {
     match event.event_type {
-        KeyRelease(_) => {
+        KeyRelease(key) => {
 
-            if let Ok(lines) = read_lines("./a.txt") {
+            if let Ok(lines) = read_lines(letter_matcher(key)) {
                 for line in lines {
                     matcher(line.unwrap())
                 }
