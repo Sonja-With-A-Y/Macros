@@ -1,4 +1,0 @@
-KeyPress(MetaLeft)
-KeyPress(Num2)
-KeyRelease(Num2)
-KeyRelease(MetaLeft)

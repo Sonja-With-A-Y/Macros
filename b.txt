@@ -1,2 +1,0 @@
-KeyPress(ControlLeft)
-KeyRelease(ControlLeft)

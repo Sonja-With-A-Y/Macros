@@ -19,7 +19,7 @@ fn main() {
 
     let mut target = read_to_string("temp_to.txt").unwrap();
 
-    target.pop();
+    if target.ends_with('\n') { target.pop(); };
 
     copy("temp.txt", target).expect("Copy failed");
 
