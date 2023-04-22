@@ -1,32 +1,26 @@
-use std::fs::read_to_string;
-use std::fs::copy;
-
 use crate::*;
 
 pub fn record() {
-    if let Err(error) = listen(choose_file) {
+    if let Err(error) = listen(choose_memory_slot) {
         println!("Error: {:?}", error)
     }
 }
 
-fn choose_file(event: Event) {
+fn choose_memory_slot(event: Event) {
     match event.event_type {
         KeyRelease(key) => {
-            
+
             let mut temp_to = OpenOptions::new()
                 .write(true)
                 .open("temp_to.txt")
                 .expect("temp_to problem");
 
-            let target = read_to_string("temp_to.txt").unwrap();
-
-            copy("temp.txt", target).expect("Copy failed");
-
             //TODO Something here is adding a new line at the end of the file being created and it
             //shouldn't be.
-            temp_to.write(letter_matcher(key).as_bytes()).expect("Problem writing to temp_to");
 
-            File::create(letter_matcher(key)).expect("File creation failed");
+            temp_to.write(memory_slot_matcher(key).as_bytes()).expect("Problem writing to temp_to");
+
+            File::create(memory_slot_matcher(key)).expect("File creation failed");
 
             let temp = OpenOptions::new()
                 .write(true)
@@ -51,18 +45,18 @@ fn recording(event: Event) {
         .expect("Cannot open file");
 
     match event.event_type {
-        KeyPress(F1) => panic!("Macro recorded successfully."),
-        KeyPress(_) => log(f, event.event_type),
-        KeyRelease(_) => log(f, event.event_type),
+        KeyPress(ControlRight) => panic!("Macro recorded successfully."),
+        KeyPress(_) => write_to_temp(f, event.event_type),
+        KeyRelease(_) => write_to_temp(f, event.event_type),
         _ => {}
     };
 }
 
-fn log(mut f: File, pressed_or_released: EventType) {
+fn write_to_temp(mut f: File, pressed_or_released: EventType) {
     f.write(format!("{:?}\n", pressed_or_released).as_bytes()).expect("idk");
 }
 
-pub fn letter_matcher(key: Key) -> String {
+pub fn memory_slot_matcher(key: Key) -> String {
     match key { 
         KeyQ => "q.txt".to_owned(),
         KeyW => "w.txt".to_owned(),

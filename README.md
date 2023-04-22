@@ -1,4 +1,13 @@
-# Macros
+# Universal Macros
+ Vim style macros, anywhere.
+
+## What does that mean?
+It means you can quickly record and play back sequ
+
+
+
+
+
 An attempt to make a program that allows Vim style macros outside of Vim.
 
 I want to press a hotkey followed by a letter, then press a bunch of keys that are recorded into [letter].txt until I hit the hotkey again.

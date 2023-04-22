@@ -11,7 +11,7 @@ fn send(event_type: &EventType) {
     thread::sleep(delay);
 }
 
-pub fn matcher(key: String) {
+pub fn str_to_event_matcher(key: String) {
     match key.as_str() {
         "KeyPress(Alt)" => { send(&EventType::KeyPress(Key::Alt)) }
         "KeyPress(AltGr)" => { send(&EventType::KeyPress(Key::AltGr)) }

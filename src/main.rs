@@ -1,3 +1,5 @@
+use std::fs::read_to_string;
+use std::fs::copy;
 use rdev::{simulate, EventType, SimulateError};
 use std::fs::{File, OpenOptions};
 use std::io::Write;
@@ -14,6 +16,13 @@ pub use record::*;
 pub use matcher::*;
 
 fn main() {
+
+    let mut target = read_to_string("temp_to.txt").unwrap();
+
+    target.pop();
+
+    copy("temp.txt", target).expect("Copy failed");
+
     if let Err(error) = listen(idle) {
         println!("Error: {:?}", error)
     }
@@ -21,8 +30,8 @@ fn main() {
 
 fn idle(event: Event) {
     match event.event_type {
-        KeyRelease(F1) => record(),
-        KeyRelease(F2) => play(),
+        KeyRelease(ControlRight) => record(),
+        KeyRelease(ShiftRight) => play(),
         _ => (),
     }
 }

@@ -13,9 +13,9 @@ fn choose_play_file(event: Event) {
     match event.event_type {
         KeyRelease(key) => {
 
-            if let Ok(lines) = read_lines(letter_matcher(key)) {
+            if let Ok(lines) = read_lines(memory_slot_matcher(key)) {
                 for line in lines {
-                    matcher(line.unwrap())
+                    str_to_event_matcher(line.unwrap())
                 }
             }
             panic!("Macro played.")
