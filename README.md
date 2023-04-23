@@ -10,7 +10,7 @@ This program is still being developed, right now it's just complete enough that 
 My current goals are making it more configurable, and setting up proper installation methods.
 
 ## Installation
-Currently, the only way to use it is to run it from source.
+Currently, the only way to use it is to run it from source. This requires cargo so make sure you have that installed.
 
 ```
 git clone https://github.com/Sonja-With-A-Y/universal-macros ; cd universal-macros
@@ -22,4 +22,4 @@ I recommend finding some sort of way to run the program from a hotkey. I use the
 
 After starting the program, tap right control to choose to record, then tap a letter to choose a memory slot. Your key presses will be recorded until you tap right control again. If you chose a, then it will be recorded into "a.txt".
 
-The program will end when you finish recording. To play that macro, start it up again, then tap right shift, followed by the letter.
+The program will end when you finish recording. To play that macro, start it up again then tap right shift, followed by the letter. The program also terminates after a macro has been played.
