@@ -2,16 +2,24 @@
  Vim style macros, anywhere.
 
 ## What does that mean?
-It means you can quickly record and play back sequ
+It means you can quickly record and play back sequences of keys outside of any particular application. Macros are recorded into one of 26 memory slots, one for each letter, and then played back with that letter.
 
+## State of the project
+This program is still being developed, right now it's just complete enough that I find it worthwhile to use, but it's still very rough around the edges.
 
+My current goals are making it more configurable, and setting up proper installation methods.
 
+## Installation
+Currently, the only way to use it is to run it from source.
 
+```
+git clone https://github.com/Sonja-With-A-Y/universal-macros ; cd universal-macros
+cargo run
+```
 
-An attempt to make a program that allows Vim style macros outside of Vim.
+## Usage
+I recommend finding some sort of way to run the program from a hotkey. I use the i3 window manager which makes this simple to do (will add recommendations for this for different operating systems).
 
-I want to press a hotkey followed by a letter, then press a bunch of keys that are recorded into [letter].txt until I hit the hotkey again.
+After starting the program, tap right control to choose to record, then tap a letter to choose a memory slot. Your key presses will be recorded until you tap right control again. If you chose a, then it will be recorded into "a.txt".
 
-I then want to hit a different hotkey followed by the letter, and that should play that macro.
-
-Currently not working.
+The program will end when you finish recording. To play that macro, start it up again, then tap right shift, followed by the letter.

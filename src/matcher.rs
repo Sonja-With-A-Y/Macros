@@ -1,7 +1,7 @@
 use crate::*;
 
 fn send(event_type: &EventType) {
-    let delay = time::Duration::from_millis(50);
+    let delay = time::Duration::from_millis(80);
     match simulate(event_type) {
         Ok(()) => (),
         Err(SimulateError) => {
