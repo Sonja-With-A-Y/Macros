@@ -1,1 +1,1 @@
-bad.txt
+a.txt
