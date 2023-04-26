@@ -1,0 +1,8 @@
+KeyPress(KeyN)
+KeyRelease(KeyN)
+KeyPress(KeyG)
+KeyPress(KeyA)
+KeyRelease(KeyG)
+KeyRelease(KeyA)
+KeyPress(Dot)
+KeyRelease(Dot)

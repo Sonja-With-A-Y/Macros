@@ -4,6 +4,9 @@ use std::io::{self, BufRead};
 use std::path::Path;
 
 pub fn play() {
+
+    println!("Choose a memory slot to play.");
+
     if let Err(error) = listen(choose_play_file) {
         println!("Error: {:?}", error)
     }
@@ -12,6 +15,8 @@ pub fn play() {
 fn choose_play_file(event: Event) {
     match event.event_type {
         KeyRelease(key) => {
+
+            println!("Playing macro {:?}.", key);
 
             if let Ok(lines) = read_lines(memory_slot_matcher(key)) {
                 for line in lines {

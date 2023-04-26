@@ -1,4 +1,3 @@
-use std::fs::read_to_string;
 use std::fs::copy;
 use rdev::{simulate, EventType, SimulateError};
 use std::fs::{File, OpenOptions};
@@ -17,11 +16,7 @@ pub use matcher::*;
 
 fn main() {
 
-    let mut target = read_to_string("temp_to.txt").unwrap();
-
-    if target.ends_with('\n') { target.pop(); };
-
-    copy("temp.txt", target).expect("Copy failed");
+    println!("Tab right control to record, or right shift to play.");
 
     if let Err(error) = listen(idle) {
         println!("Error: {:?}", error)

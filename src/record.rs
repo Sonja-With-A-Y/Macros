@@ -1,6 +1,9 @@
 use crate::*;
 
 pub fn record() {
+
+    println!("Recording macro, choose memory slot.");
+
     if let Err(error) = listen(choose_memory_slot) {
         println!("Error: {:?}", error)
     }
@@ -10,25 +13,25 @@ fn choose_memory_slot(event: Event) {
     match event.event_type {
         KeyRelease(key) => {
 
-            let mut temp_to = OpenOptions::new()
-                .write(true)
-                .open("temp_to.txt")
-                .expect("temp_to problem");
+            println!("Recording into memory slot {:?}. Tap right control to finish.", key);
 
-            //TODO Something here is adding a new line at the end of the file being created and it
-            //shouldn't be.
+            struct Log<'a> {
+                file: &'a String
+            }
 
-            temp_to.write(memory_slot_matcher(key).as_bytes()).expect("Problem writing to temp_to");
+            impl<'a> Drop for Log<'a> {
+                fn drop(&mut self) {
+                    copy("temp.txt", &self.file)
+                        .expect("Copy failed");
+                }
+            }
 
+            let _exit = Log {
+                file: &memory_slot_matcher(key)
+            };
+
+            File::create("temp.txt").expect("File creation failed");
             File::create(memory_slot_matcher(key)).expect("File creation failed");
-
-            let temp = OpenOptions::new()
-                .write(true)
-                .open("temp.txt")
-                .expect("Problem opening temp.txt to clear it");
-
-            temp.set_len(0).expect("Problem clearing temp.txt");
-            
 
             if let Err(error) = listen(recording) {
                 println!("Error: {:?}", error)
@@ -39,10 +42,11 @@ fn choose_memory_slot(event: Event) {
 }
 
 fn recording(event: Event) {
+
     let f = OpenOptions::new()
         .append(true)
         .open("temp.txt")
-        .expect("Cannot open file");
+        .expect("Cannot open temp file");
 
     match event.event_type {
         KeyPress(ControlRight) => panic!("Macro recorded successfully."),
