@@ -1,5 +1,5 @@
 # Universal Macros
- Vim style macros, anywhere.
+ Vim style macros, anywhere (except Wayland).
 
 ## What does that mean?
 It means you can quickly record and play back sequences of keys outside of any particular application. Macros are recorded into one of 26 memory slots, one for each letter, and then played back with that letter.
